@@ -1,0 +1,102 @@
+> mpiexec -n 3 berkeley.exe -e -r 1
+==============================================================
+ ALGORITMO DE BERKELEY - sincronizacao de relogios com MPI
+==============================================================
+ Processos: 3  (coordenador = rank 0, escravos = 2)
+ Rodadas: 1 | tolerancia: 3600.000s | atraso max. rede: 0.0ms
+==============================================================
+
+---------------------------- RODADA 1 ----------------------------
+rank  relogio lido  diferenca     RTT(ms)  media? ajuste        dif. depois  
+0     03:00:00.000  +0.000s       0.000    sim    +5m00.000s    +0.000s        <- coordenador
+1     03:25:00.000  +25m00.000s   0.011    sim    -20m00.000s   +0.000s      
+2     02:50:00.000  -10m00.000s   0.001    sim    +15m00.000s   +0.000s      
+Media tolerante a falhas: +5m00.000s (3 de 3 relogios usados)
+Dispersao (maior - menor): antes = 2100.000006 s | depois = 0.000000 s
+Horario comum apos o ajuste: 03:05:00.000
+
+==============================================================
+ RESULTADO: relogios SINCRONIZADOS (dispersao final 0.000000 s <= 0.050 s)
+==============================================================
+
+> mpiexec -n 5 berkeley.exe -r 2
+==============================================================
+ ALGORITMO DE BERKELEY - sincronizacao de relogios com MPI
+==============================================================
+ Processos: 5  (coordenador = rank 0, escravos = 4)
+ Rodadas: 2 | tolerancia: 300.000s | atraso max. rede: 5.0ms
+==============================================================
+
+---------------------------- RODADA 1 ----------------------------
+rank  relogio lido  diferenca     RTT(ms)  media? ajuste        dif. depois  
+0     12:00:59.302  +0.000s       0.000    sim    -27.155s      +0.000s        <- coordenador
+1     12:00:21.742  -37.576s      3.210    sim    +10.421s      -0.003s      
+2     12:00:57.900  -1.422s       1.142    sim    -25.734s      -0.001s      
+3     12:00:59.622  +0.274s       4.813    sim    -27.429s      -0.002s      
+4     11:59:22.305  -1m37.052s    2.128    sim    +1m09.897s    +0.000s      
+Media tolerante a falhas: -27.155s (5 de 5 relogios usados)
+Dispersao (maior - menor): antes = 97.326486 s | depois = 0.003339 s
+Horario comum apos o ajuste: 12:00:32.279
+
+---------------------------- RODADA 2 ----------------------------
+rank  relogio lido  diferenca     RTT(ms)  media? ajuste        dif. depois  
+0     12:00:32.780  +0.000s       0.000    sim    -0.002s       +0.000s        <- coordenador
+1     12:00:32.784  +0.002s       4.784    sim    -0.003s       -0.001s      
+2     12:00:32.804  -0.001s       3.579    sim    -0.001s       -0.001s      
+3     12:00:32.816  -0.006s       1.046    sim    +0.004s       +0.000s      
+4     12:00:32.828  -0.003s       1.604    sim    +0.001s       -0.001s      
+Media tolerante a falhas: -0.002s (5 de 5 relogios usados)
+Dispersao (maior - menor): antes = 0.007636 s | depois = 0.001117 s
+Horario comum apos o ajuste: 12:00:32.899
+
+==============================================================
+ RESULTADO: relogios SINCRONIZADOS (dispersao final 0.001117 s <= 0.060 s)
+==============================================================
+
+> mpiexec -n 6 berkeley.exe -f 3 -r 1
+==============================================================
+ ALGORITMO DE BERKELEY - sincronizacao de relogios com MPI
+==============================================================
+ Processos: 6  (coordenador = rank 0, escravos = 5)
+ Rodadas: 1 | tolerancia: 300.000s | atraso max. rede: 5.0ms
+ Processo com relogio defeituoso (+1h): rank 3
+==============================================================
+
+---------------------------- RODADA 1 ----------------------------
+rank  relogio lido  diferenca     RTT(ms)  media? ajuste        dif. depois  
+0     12:00:59.302  +0.000s       0.000    sim    -43.091s      +0.000s        <- coordenador
+1     12:00:21.742  -37.576s      3.206    sim    -5.515s       -0.003s      
+2     12:00:57.899  -1.422s       1.130    sim    -41.670s      -0.001s      
+3     13:00:59.621  +60m00.274s   4.815    NAO    -60m43.365s   -0.002s      
+4     11:59:22.305  -1m37.052s    2.104    sim    +53.961s      +0.000s      
+5     11:59:39.972  -1m19.407s    2.893    sim    +36.316s      +0.000s      
+Media tolerante a falhas: -43.091s (5 de 6 relogios usados)
+Dispersao (maior - menor): antes = 3697.326431 s | depois = 0.003252 s
+Horario comum apos o ajuste: 12:00:16.377
+Aviso: rank 3 descartado da media (relogio discrepante), mas tambem foi corrigido.
+
+==============================================================
+ RESULTADO: relogios SINCRONIZADOS (dispersao final 0.003252 s <= 0.060 s)
+==============================================================
+
+> mpiexec -n 4 berkeley.exe -c 2 -r 1
+==============================================================
+ ALGORITMO DE BERKELEY - sincronizacao de relogios com MPI
+==============================================================
+ Processos: 4  (coordenador = rank 2, escravos = 3)
+ Rodadas: 1 | tolerancia: 300.000s | atraso max. rede: 5.0ms
+==============================================================
+
+---------------------------- RODADA 1 ----------------------------
+rank  relogio lido  diferenca     RTT(ms)  media? ajuste        dif. depois  
+0     12:00:59.312  +1.419s       5.016    sim    -9.679s       +0.002s      
+1     12:00:21.757  -36.154s      3.189    sim    +27.894s      -0.003s      
+2     12:00:57.913  +0.000s       0.000    sim    -8.260s       +0.000s        <- coordenador
+3     12:00:59.627  +1.695s       4.793    sim    -9.955s       -0.001s      
+Media tolerante a falhas: -8.260s (4 de 4 relogios usados)
+Dispersao (maior - menor): antes = 37.849885 s | depois = 0.004732 s
+Horario comum apos o ajuste: 12:00:49.729
+
+==============================================================
+ RESULTADO: relogios SINCRONIZADOS (dispersao final 0.004732 s <= 0.060 s)
+==============================================================
