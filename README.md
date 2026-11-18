@@ -112,6 +112,20 @@ docker run --rm -it -v "$PWD:/src" -w /src ubuntu:24.04 bash -c \
 | `-e` | exemplo clássico do livro (use `-n 3`) | – |
 | `-h` | ajuda | – |
 
+### Várias máquinas (nós reais da rede)
+
+Cada processo MPI é um **nó** do sistema. O mesmo programa roda sem nenhuma alteração com os processos espalhados em várias máquinas: basta o `berkeley` estar no mesmo caminho em todas.
+
+```bash
+# OpenMPI/MPICH: hosts.txt com uma máquina por linha (ex.: "pc1 slots=2")
+mpirun -n 8 --hostfile hosts.txt ./berkeley
+```
+
+```bat
+:: MS-MPI: rodar "smpd -d" em cada máquina antes
+mpiexec -hosts 3 pc1 2 pc2 3 pc3 3 berkeley.exe
+```
+
 ## 4. Resultados
 
 A saída completa está em [`saida_exemplo.txt`](saida_exemplo.txt). Resumo dos testes:
@@ -138,7 +152,7 @@ Depois do ajuste, a dispersão que sobra (alguns milissegundos) é o **erro de e
 | Algoritmo de **Berkeley** | `coordenador()`: coleta → média tolerante a falhas → ajuste individual |
 | Usando **MPI** | `MPI_Init`, `MPI_Comm_rank`, `MPI_Comm_size`, `MPI_Send`, `MPI_Recv`, `MPI_Finalize` |
 | `MPI_Send` / `MPI_Recv` (visto em aula) | Toda a comunicação do algoritmo: funções `coletar()`, `escravo()` e o laço de ajuste |
-| **Quantidade qualquer** de processos | `MPI_Comm_size(MPI_COMM_WORLD, &n)`, com vetores alocados com `malloc(n)` |
+| **Quantidade qualquer** de nós (processos MPI) | `MPI_Comm_size(MPI_COMM_WORLD, &n)`, com vetores alocados com `malloc(n)` |
 | Mestre-Escravo (aula) | `if (rank == coordenador) coordenador(); else escravo();` |
 
 ## 6. Casos especiais tratados

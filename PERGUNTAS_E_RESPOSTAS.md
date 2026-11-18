@@ -193,3 +193,6 @@ No Berkeley, não: quem tem a visão global (todas as diferenças) é o coordena
 
 **50. Qual a diferença entre o diagrama de matrizes da aula e este trabalho?**
 É o **mesmo padrão Mestre‑Escravo**. Nas matrizes, o mestre envia submatrizes e recebe blocos do resultado. No Berkeley, o mestre envia pedidos de hora e recebe as horas, depois envia ajustes. Em ambos, as "setas de ida e volta" são `MPI_Send`/`MPI_Recv`.
+
+**51. O enunciado fala em "quantidade qualquer de nós". Vocês testaram com processos. É a mesma coisa?**
+Sim. No MPI cada processo é um nó do sistema distribuído: ele tem memória própria, o seu próprio relógio (simulado) e só se comunica por mensagens. Por isso, num computador só, N processos se comportam como N nós. O código não depende de onde os processos rodam: com `mpirun --hostfile` (OpenMPI) ou `mpiexec -hosts` (MS-MPI) os mesmos processos ficam em máquinas diferentes da rede, sem mudar nenhuma linha. N vem de `MPI_Comm_size`, então qualquer quantidade de nós funciona.
