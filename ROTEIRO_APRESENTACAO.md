@@ -16,7 +16,7 @@ Material: os 16 slides (link do deck), `berkeley.c` aberto no editor e um termin
    ```bat
    mpiexec -n 3 berkeley.exe -e -r 1
    ```
-3. Se `berkeley.exe` sumir ou der erro, recompile com `build.bat`.
+3. Se `berkeley.exe` sumir ou der erro, recompile com `.\build.bat`.
 4. Se o Windows bloquear o .exe ("política de Controle de Aplicativo"), use o **plano B**, o Docker:
    ```bash
    docker run --rm -it -v "%cd%:/src" -w /src ubuntu:24.04 bash -c "apt update && apt install -y openmpi-bin libopenmpi-dev gcc make && export OMPI_ALLOW_RUN_AS_ROOT=1 OMPI_ALLOW_RUN_AS_ROOT_CONFIRM=1 && make exemplo && make falha"
@@ -62,7 +62,7 @@ Mostre no `berkeley.c`:
 
 ## 5. Demonstração (≈ 4 min), slide 12, depois slides 13 e 14 (resultados e validação)
 
-Rode `executar.bat` (ele pausa entre as etapas) ou digite os comandos abaixo.
+Rode `.\executar.bat` (ele pausa entre as etapas) ou digite os comandos abaixo.
 
 ### Demo 1: exemplo do livro
 ```bat
@@ -124,7 +124,7 @@ rank  relogio lido  diferenca     RTT(ms)  media? ajuste        dif. depois
 | Problema | Solução |
 |---|---|
 | `'mpiexec' não é reconhecido` | `set "PATH=C:\Program Files\Microsoft MPI\Bin;%PATH%"` |
-| `berkeley.exe` não existe | `build.bat` |
+| `berkeley.exe` não existe | `.\build.bat` |
 | "política de Controle de Aplicativo bloqueou" | Plano B (Docker) ou plano C (`saida_exemplo.txt`) |
 | Tabela quebrada em várias linhas | aumente a largura da janela do terminal |
 | Demora com muitos processos | use no máximo cerca de 16 processos no notebook |

@@ -5,7 +5,7 @@ cd /d "%~dp0"
 
 if not exist berkeley.exe (
     echo berkeley.exe nao encontrado - compilando...
-    call build.bat || exit /b 1
+    call .\build.bat || exit /b 1
 )
 
 echo.

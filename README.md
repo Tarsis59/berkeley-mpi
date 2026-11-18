@@ -70,9 +70,9 @@ winget install Microsoft.msmpi
 winget install Microsoft.msmpisdk
 winget install BrechtSanders.WinLibs.POSIX.UCRT
 
-build.bat
+.\build.bat
 mpiexec -n 5 berkeley.exe
-executar.bat 8          :: demonstração completa com 8 processos
+.\executar.bat              :: demonstração completa, em 5 etapas
 ```
 
 > Se o Windows bloquear o `berkeley.exe` com "Uma política de Controle de Aplicativo bloqueou este arquivo", a causa é o *Smart App Control*, que bloqueia executáveis recém-compilados sem assinatura. Nesse caso use WSL ou Docker (abaixo).
@@ -154,8 +154,8 @@ Depois do ajuste, a dispersão que sobra (alguns milissegundos) é o **erro de e
 | Arquivo | Conteúdo |
 |---|---|
 | `berkeley.c` | código-fonte em C |
-| `build.bat` | compilação no Windows (MS-MPI + gcc) |
-| `executar.bat` | demonstração para a apresentação, em 5 etapas com pausa |
+| `.\build.bat` | compilação no Windows (MS-MPI + gcc) |
+| `.\executar.bat` | demonstração para a apresentação, em 5 etapas com pausa |
 | `ROTEIRO_APRESENTACAO.md` | roteiro da apresentação, fala por fala, com a demonstração |
 | `PERGUNTAS_E_RESPOSTAS.md` | perguntas que o professor pode fazer, com as respostas |
 | `Makefile` | compilação e execução no Linux/WSL |
